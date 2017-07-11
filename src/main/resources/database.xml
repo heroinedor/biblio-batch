@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/jdbc
+	   http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <!-- connect to MySQL batch schema -->
+    <bean id="dataSourceRepository" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3307/job-repository"/>
+        <property name="username" value="batchs"/>
+        <property name="password" value="batchs"/>
+    </bean>
+
+    <!-- connect to MySQL business schema -->
+    <bean id="dataSourceBooks" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3307/books"/>
+        <property name="username" value="book"/>
+        <property name="password" value="book"/>
+    </bean>
+
+    <!-- create job-meta tables automatically -->
+    <jdbc:initialize-database data-source="dataSourceRepository">
+        <jdbc:script location="org/springframework/batch/core/schema-drop-mysql.sql"/>
+        <jdbc:script location="org/springframework/batch/core/schema-mysql.sql"/>
+    </jdbc:initialize-database>
+
+</beans>

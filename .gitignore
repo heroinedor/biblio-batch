@@ -4,12 +4,6 @@
 # Log file
 *.log
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
 # Package Files #
 *.jar
 *.war
@@ -24,3 +18,9 @@ hs_err_pid*
 # IDE settings
 .idea
 .settings
+
+#compilation
+target
+
+#SQL
+src/main/resources/sql/*.bak
