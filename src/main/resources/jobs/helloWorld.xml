@@ -8,8 +8,13 @@
 
     <beans:bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
-    <!-- TODO : add the helloWorldJob job definition with just 1 step that calls the printTasklet tasklet -->
+    <!-- job definition-->
+    <job id="helloWorldJob" job-repository="jobRepository">
+        <step id="hello">
+            <tasklet ref="printTasklet"/>
+        </step>
+    </job>
 
-    <!-- TODO : add the printTasklet bean definition with class attribut mapped to hello.PrintTasklet -->
+    <beans:bean id="printTasklet" class="hello.PrintTasklet"/>
 
 </beans:beans>
