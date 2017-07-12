@@ -8,9 +8,6 @@
 
     <beans:bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
-    <!-- Context Spring + database-->
-    <beans:import resource="../context.xml"/>
-
     <!-- job definition-->
     <job id="helloWorldJob" job-repository="jobRepository">
         <step id="hello">
