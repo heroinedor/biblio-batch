@@ -4,10 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- database configuration -->
-    <import resource="database.xml" />
-    <!-- jobs -->
-    <import resource="classpath:jobs/helloWorld.xml"/>
+    <import resource="database-test.xml" />
     <import resource="classpath:jobs/biblioBatchJob.xml"/>
 
     <!-- stored job-meta in database -->
@@ -24,6 +21,12 @@
     <bean id="jobLauncher"
           class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
         <property name="jobRepository" ref="jobRepository"/>
+    </bean>
+
+    <bean id="jobLauncherTestUtils" class="org.springframework.batch.test.JobLauncherTestUtils" >
+        <property name="job" ref="biblioBatchJob"/>
+        <property name="jobRepository" ref="jobRepository"/>
+        <property name="jobLauncher" ref="jobLauncher"/>
     </bean>
 
 </beans>

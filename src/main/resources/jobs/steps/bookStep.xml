@@ -9,7 +9,7 @@
     <!-- TODO : add a taskletStep referencing createBookTasklet -->
 
     <beans:bean id="createBookTasklet" class="biblio.book.BookTasklet">
-        <beans:property name="resource" value="classpath:books/lorem-ipsum.txt"/>
+        <beans:property name="resource" value="file:C:\temp\books\lorem-ipsum.txt"/>
         <beans:property name="bookDao" ref="bookDao"/>
     </beans:bean>
 </beans:beans>
