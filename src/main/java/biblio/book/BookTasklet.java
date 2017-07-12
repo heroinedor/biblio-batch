@@ -1,5 +1,9 @@
 package biblio.book;
 
+import org.springframework.batch.core.StepContribution;
+import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.core.io.Resource;
 
 import java.io.BufferedReader;
@@ -10,13 +14,30 @@ import java.io.IOException;
 /**
  * Created by heroinedor on 05/07/2017.
  */
-public class BookTasklet {
+public class BookTasklet implements Tasklet {
 
     private Resource resource;
     private BookDao bookDao;
 
-    //TODO implement the Tasklet interface and the "execute" method to open the book file using the readFile method
-    // and save the title and the content in DB
+
+    public RepeatStatus execute(StepContribution contribution,
+                                ChunkContext chunkContext) throws Exception {
+        Book book = new Book();
+        //book title
+        String fileName = resource.getFilename();
+        String title = resource.getFilename().substring(0, fileName.indexOf('.'));
+        book.setTitle(title);
+
+        //book content
+        File contentFile = resource.getFile();
+        String content = readFile(contentFile);
+        book.setContent(content);
+
+        //save in database
+        int idBook = bookDao.add(book);
+
+        return RepeatStatus.FINISHED;
+    }
 
     /**
      * Reads the file which name is passed in parameters and return the content in a String

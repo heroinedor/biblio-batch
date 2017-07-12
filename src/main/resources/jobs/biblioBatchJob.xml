@@ -8,11 +8,10 @@
 
     <beans:bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
-    <!-- Context Spring + database-->
-    <beans:import resource="../context.xml"/>
-
     <!-- Steps-->
     <beans:import resource="steps/bookStep.xml"/>
 
-    <!-- TODO : add a job with id biblioBatchJob containing one step with bookStep as parent -->
+    <job id="biblioBatchJob" job-repository="jobRepository">
+        <step id="createBook" parent="bookStep"/>
+    </job>
 </beans:beans>

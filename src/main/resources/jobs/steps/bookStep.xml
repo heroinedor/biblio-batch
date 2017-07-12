@@ -6,7 +6,9 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
 
-    <!-- TODO : add a taskletStep referencing createBookTasklet -->
+    <step id="bookStep">
+        <tasklet ref="createBookTasklet" transaction-manager="transactionManager"/>
+    </step>
 
     <beans:bean id="createBookTasklet" class="biblio.book.BookTasklet">
         <beans:property name="resource" value="file:C:\dev\src\perso\biblio-batch\src\main\resources\books\lorem-ipsum.txt"/>

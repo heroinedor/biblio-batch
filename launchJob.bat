@@ -1,1 +1,1 @@
-java -cp "target/*" org.springframework.batch.core.launch.support.CommandLineJobRunner jobs/helloWorld.xml helloWorldJob
+java -cp "target/*" org.springframework.batch.core.launch.support.CommandLineJobRunner context.xml biblioBatchJob
