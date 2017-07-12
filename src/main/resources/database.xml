@@ -23,6 +23,11 @@
         <property name="password" value="book"/>
     </bean>
 
+    <!-- DAO -->
+    <bean id="bookDao" class="biblio.book.BookDao">
+        <property name="dataSource" ref="dataSourceBooks"/>
+    </bean>
+
     <!-- create job-meta tables automatically -->
 <!--    <jdbc:initialize-database data-source="dataSourceRepository">
         <jdbc:script location="org/springframework/batch/core/schema-drop-mysql.sql"/>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/batch"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+    <!-- TODO : add a taskletStep referencing createBookTasklet -->
+
+    <beans:bean id="createBookTasklet" class="biblio.book.BookTasklet">
+        <beans:property name="resource" value="classpath:books/lorem-ipsum.txt"/>
+        <beans:property name="bookDao" ref="bookDao"/>
+    </beans:bean>
+</beans:beans>
+
+
