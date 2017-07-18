@@ -8,18 +8,20 @@
 
     <step id="sentenceStep">
         <tasklet transaction-manager="transactionManager">
-            <!-- TODO : add the line that links the itemReader, the itemProcessor and the itemWriter to the chunk, with a commit-interval -->
+            <chunk reader="itemReader" writer="mysqlItemWriter" processor="itemProcessor" commit-interval="10"/>
         </tasklet>
     </step>
 
     <!-- itemReader -->
-    <!-- TODO : add a bean with :
-            - id="itemReader" linked to the class FlatFileItemReader
-            - a "resource" property with value="file:C:\temp\books\lorem-ipsum.txt""
-            - a "lineMapper" property linked to the sentenceMapper -->
+    <beans:bean id="itemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+        <beans:property name="resource" value="file:C:\temp\books\lorem-ipsum.txt"/>
+        <beans:property name="lineMapper">
+            <beans:bean class="biblio.sentence.SentenceMapper"/>
+        </beans:property>
+    </beans:bean>
 
     <!-- itemProcessor -->
-    <!-- TODO : add a bean with id="itemProcessor" linked to the SentenceProcessor-->
+    <beans:bean id="itemProcessor" class="biblio.sentence.SentenceProcessor" />
 
     <!-- itemWriter -->
     <beans:bean id="mysqlItemWriter" class="org.springframework.batch.item.database.JdbcBatchItemWriter">

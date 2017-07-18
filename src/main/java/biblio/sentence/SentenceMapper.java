@@ -1,10 +1,15 @@
 package biblio.sentence;
 
+import org.springframework.batch.item.file.LineMapper;
+
 /**
  * Created by heroinedor on 05/07/2017.
  */
-public class SentenceMapper {
+public class SentenceMapper implements LineMapper<Sentence> {
 
-//TODO Implement the LineMapper interface  and the mapLine method to transform a read line into a Sentence object
-
+    public Sentence mapLine(String line, int lineNumber) throws Exception {
+        Sentence phrase = new Sentence();
+        phrase.setSentence(line);
+        return phrase;
+    }
 }
