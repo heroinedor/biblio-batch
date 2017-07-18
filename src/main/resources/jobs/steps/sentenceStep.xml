@@ -8,7 +8,6 @@
 
     <step id="sentenceStep">
         <tasklet transaction-manager="transactionManager">
-            <chunk reader="itemReader" writer="mysqlItemWriter" processor="itemProcessor" commit-interval="10"/>
             <!-- TODO : add the line that links the itemReader, the itemProcessor and the itemWriter to the chunk, with a commit-interval -->
         </tasklet>
     </step>
