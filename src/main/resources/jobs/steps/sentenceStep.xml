@@ -15,7 +15,7 @@
     <!-- itemReader -->
     <!-- TODO : add a bean with :
             - id="itemReader" linked to the class FlatFileItemReader
-            - a "resource" property with value="file:C:\dev\src\perso\biblio-batch\src\main\resources\books\lorem-ipsum.txt"
+            - a "resource" property with value="file:C:\temp\books\lorem-ipsum.txt""
             - a "lineMapper" property linked to the sentenceMapper -->
 
     <!-- itemProcessor -->
