@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/batch"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+    <step id="sentenceStep">
+        <tasklet transaction-manager="transactionManager">
+            <chunk reader="itemReader" writer="mysqlItemWriter" processor="itemProcessor" commit-interval="10"/>
+            <!-- TODO : add the line that links the itemReader, the itemProcessor and the itemWriter to the chunk, with a commit-interval -->
+        </tasklet>
+    </step>
+
+    <!-- itemReader -->
+    <!-- TODO : add a bean with :
+            - id="itemReader" linked to the class FlatFileItemReader
+            - a "resource" property with value="file:C:\dev\src\perso\biblio-batch\src\main\resources\books\lorem-ipsum.txt"
+            - a "lineMapper" property linked to the sentenceMapper -->
+
+    <!-- itemProcessor -->
+    <!-- TODO : add a bean with id="itemProcessor" linked to the SentenceProcessor-->
+
+    <!-- itemWriter -->
+    <beans:bean id="mysqlItemWriter" class="org.springframework.batch.item.database.JdbcBatchItemWriter">
+        <beans:property name="dataSource" ref="dataSourceBooks"/>
+        <beans:property name="sql">
+            <beans:value>
+                <![CDATA[
+            	insert into SENTENCE(sentence,book_idbook)
+			values (:sentence, :idBook)
+            ]]>
+            </beans:value>
+        </beans:property>
+        <!-- It will take care matching between object property and sql name parameter -->
+        <beans:property name="itemSqlParameterSourceProvider">
+            <beans:bean
+                    class="org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider"/>
+        </beans:property>
+    </beans:bean>
+</beans:beans>
+
+
