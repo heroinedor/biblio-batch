@@ -1,22 +1,31 @@
 package biblio.sentence;
 
+import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.BeforeStep;
+import org.springframework.batch.item.ExecutionContext;
+import org.springframework.batch.item.ItemProcessor;
 
 /**
  * Created by heroindor on 06/07/2017.
  */
-public class SentenceProcessor {
+public class SentenceProcessor implements ItemProcessor<Sentence, Sentence> {
     private long bookId;
 
     @BeforeStep
     public void retrieveInterstepData(StepExecution stepExecution) {
-        //TODO set the bookId  with the "idBook" parameter extracted from the jobExecutioncontext
+        JobExecution jobExecution = stepExecution.getJobExecution();
+        ExecutionContext jobContext = jobExecution.getExecutionContext();
+        Integer idBook = (Integer) jobContext.get("idBook");
+        this.bookId = idBook;
     }
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 
-    //TODO Implement the ItemProcessor interface  and the process method to set the bookId to the Sentence item
+    public Sentence process(Sentence item) throws Exception {
+        item.setIdBook(bookId);
+        return item;
+    }
 }

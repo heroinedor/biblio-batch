@@ -12,10 +12,16 @@
     <beans:import resource="steps/bookStep.xml"/>
     <beans:import resource="steps/sentenceStep.xml"/>
 
-    <!-- TODO : add the sentenceStep -->
     <job id="biblioBatchJob" job-repository="jobRepository">
-        <step id="createBook" parent="bookStep"/>
+        <step id="createBook" parent="bookStep" next="copyText">
+            <listeners>
+                <listener ref="promotionListener"/>
+            </listeners>
+        </step>
+        <step id="copyText" parent="sentenceStep"/>
     </job>
 
-    <!-- TODO : add a promotion listener to pass the "idBook" value from the stepExecution level to the Jobexecution level -->
+    <beans:bean id="promotionListener" class="org.springframework.batch.core.listener.ExecutionContextPromotionListener">
+        <beans:property name="keys" value="idBook"/>
+    </beans:bean>
 </beans:beans>
