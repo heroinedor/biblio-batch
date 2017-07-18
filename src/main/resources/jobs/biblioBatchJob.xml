@@ -10,8 +10,12 @@
 
     <!-- Steps-->
     <beans:import resource="steps/bookStep.xml"/>
+    <beans:import resource="steps/sentenceStep.xml"/>
 
+    <!-- TODO : add the sentenceStep -->
     <job id="biblioBatchJob" job-repository="jobRepository">
         <step id="createBook" parent="bookStep"/>
     </job>
+
+    <!-- TODO : add a promotion listener to pass the "idBook" value from the stepExecution level to the Jobexecution level -->
 </beans:beans>
