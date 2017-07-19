@@ -24,9 +24,7 @@
     <beans:bean id="itemProcessor" class="biblio.sentence.SentenceProcessor" />
 
     <!-- itemWriter -->
-    <beans:bean id="mysqlItemWriter" class="biblio.sentence.SentenceWriter">
-        <beans:property name="dao" ref="sentenceDao"/>
-    </beans:bean>
+    <beans:bean id="mysqlItemWriter" class="biblio.sentence.SentenceWriter"/>
 </beans:beans>
 
 
