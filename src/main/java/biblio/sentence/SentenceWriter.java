@@ -17,4 +17,8 @@ public class SentenceWriter implements ItemWriter<Sentence> {
             sentenceDao.insert(phrase);
         }
     }
+
+    public void setSentenceDao(SentenceDao sentenceDao) {
+        this.sentenceDao = sentenceDao;
+    }
 }
