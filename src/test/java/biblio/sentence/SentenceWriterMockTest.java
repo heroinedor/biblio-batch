@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 /**
  * Created by heroinedor on 19/07/2017.
  */
@@ -28,15 +31,15 @@ public class SentenceWriterMockTest {
         sentenceBis.setIdBook(1);
         items.add(sentenceBis);
         writer = new SentenceWriter();
-        //TODO create a mock of sentenceDao and set it to the writer
+        sentenceDao = mock(SentenceDao.class);
+        writer.setSentenceDao(sentenceDao);
     }
 
     @Test
     public void testWriteSentence() throws Exception {
-        //TODO use the when / thenReturn methods of mockito
-        // to let sentenceDao return 1 each time the insert method is called with a Sentence argument
+        when(sentenceDao.insert(any(Sentence.class))).thenReturn(1);
         writer.write(items);
-        //TODO Verify with mockito that the sentenceDao.insert method is called only 2 times with a Sentence argument
-        //and that no more interactions occurs after
+        verify(sentenceDao, times(2)).insert(any(Sentence.class));
+        verifyNoMoreInteractions(sentenceDao);
     }
 }
