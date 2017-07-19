@@ -24,21 +24,8 @@
     <beans:bean id="itemProcessor" class="biblio.sentence.SentenceProcessor" />
 
     <!-- itemWriter -->
-    <beans:bean id="mysqlItemWriter" class="org.springframework.batch.item.database.JdbcBatchItemWriter">
-        <beans:property name="dataSource" ref="dataSourceBooks"/>
-        <beans:property name="sql">
-            <beans:value>
-                <![CDATA[
-            	insert into SENTENCE(sentence,book_idbook)
-			values (:sentence, :idBook)
-            ]]>
-            </beans:value>
-        </beans:property>
-        <!-- It will take care matching between object property and sql name parameter -->
-        <beans:property name="itemSqlParameterSourceProvider">
-            <beans:bean
-                    class="org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider"/>
-        </beans:property>
+    <beans:bean id="mysqlItemWriter" class="biblio.sentence.SentenceWriter">
+        <beans:property name="dao" ref="sentenceDao"/>
     </beans:bean>
 </beans:beans>
 
