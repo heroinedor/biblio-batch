@@ -1,7 +1,9 @@
 package biblio.book;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,6 +21,7 @@ public class BookTaskletITCase {
 
     @Test
     public void testBookTaskletTest() throws Exception {
-        //TODO write a test that launches only the "createBook" TaskletStep
+        JobExecution jobExecution = jobLauncherTestUtils.launchStep("createBook");
+        Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
     }
 }
