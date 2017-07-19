@@ -27,6 +27,9 @@
     <bean id="bookDao" class="biblio.book.BookDao">
         <property name="dataSource" ref="dataSourceBooks"/>
     </bean>
+    <bean id="sentenceDao" class="biblio.sentence.SentenceDao">
+        <property name="dataSource" ref="dataSourceBooks"/>
+    </bean>
 
     <!-- create job-meta tables automatically -->
 <!--    <jdbc:initialize-database data-source="dataSourceRepository">
