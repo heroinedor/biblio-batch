@@ -17,7 +17,7 @@ public class BookDao {
 
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.insertActor = new SimpleJdbcInsert(dataSource).withTableName("book");
+        this.insertActor = new SimpleJdbcInsert(dataSource).withTableName("book").usingGeneratedKeyColumns("idbook");
     }
 
     /**
@@ -26,13 +26,12 @@ public class BookDao {
      * @param book
      * @return the generated id
      */
-    public int add(Book book) {
-        int idBook;
+    public long add(Book book) {
         Map<String, Object> parameters = new HashMap<String, Object>(3);
         parameters.put("id", book.getIdBook());
         parameters.put("title", book.getTitle());
         parameters.put("content", book.getContent());
-        idBook = insertActor.execute(parameters);
-        return idBook;
+        Number key = insertActor.executeAndReturnKey(parameters);
+        return key.longValue();
     }
 }
