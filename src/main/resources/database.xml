@@ -24,9 +24,9 @@
     </bean>
 
     <!-- create job-meta tables automatically -->
-    <jdbc:initialize-database data-source="dataSourceRepository">
+<!--    <jdbc:initialize-database data-source="dataSourceRepository">
         <jdbc:script location="org/springframework/batch/core/schema-drop-mysql.sql"/>
         <jdbc:script location="org/springframework/batch/core/schema-mysql.sql"/>
-    </jdbc:initialize-database>
+    </jdbc:initialize-database>-->
 
 </beans>

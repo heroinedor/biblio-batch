@@ -5,6 +5,7 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <import resource="database.xml" />
+    <import resource="jobs/helloWorld.xml"/>
 
     <!-- stored job-meta in database -->
     <bean id="jobRepository"
