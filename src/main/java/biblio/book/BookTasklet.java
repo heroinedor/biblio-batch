@@ -36,7 +36,7 @@ public class BookTasklet implements Tasklet {
         //save in database
         int idBook = bookDao.add(book);
 
-        //TODO add the "idBook" parameter in JobExecutionContext
+        //TODO add the "idBook" parameter in StepExecutionContext
 
         return RepeatStatus.FINISHED;
     }
