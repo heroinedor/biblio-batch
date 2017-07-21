@@ -29,4 +29,4 @@ CREATE TABLE `word` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='contient l''ensemble des mots avec le nombre d''occurence par mot';
 
 CREATE USER 'book'@'localhost' IDENTIFIED BY 'book';
-GRANT ALL PRIVILEGES ON `book`.* TO 'book'@'localhost';
+GRANT ALL PRIVILEGES ON `books`.* TO 'book'@'localhost';
