@@ -8,9 +8,6 @@
 
     <beans:bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
-    <!-- Context Spring + database-->
-    <beans:import resource="../context.xml"/>
-
     <!-- Steps-->
     <beans:import resource="steps/bookStep.xml"/>
 
