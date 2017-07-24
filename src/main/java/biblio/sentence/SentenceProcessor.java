@@ -7,7 +7,7 @@ import org.springframework.batch.core.annotation.BeforeStep;
  * Created by heroindor on 06/07/2017.
  */
 public class SentenceProcessor {
-    private int bookId;
+    private long bookId;
 
     @BeforeStep
     public void retrieveInterstepData(StepExecution stepExecution) {

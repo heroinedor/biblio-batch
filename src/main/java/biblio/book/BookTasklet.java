@@ -34,7 +34,7 @@ public class BookTasklet implements Tasklet {
         book.setContent(content);
 
         //save in database
-        int idBook = bookDao.add(book);
+        long idBook = bookDao.add(book);
 
         //TODO add the "idBook" parameter in StepExecutionContext
 

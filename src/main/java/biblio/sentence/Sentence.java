@@ -6,7 +6,7 @@ package biblio.sentence;
 public class Sentence {
     private int idSentence;
     private String sentence;
-    private int idBook;
+    private long idBook;
 
     public int getIdSentence() {
         return idSentence;
@@ -24,11 +24,11 @@ public class Sentence {
         this.sentence = sentence;
     }
 
-    public int getIdBook() {
+    public long getIdBook() {
         return idBook;
     }
 
-    public void setIdBook(int idBook) {
+    public void setIdBook(long idBook) {
         this.idBook = idBook;
     }
 }

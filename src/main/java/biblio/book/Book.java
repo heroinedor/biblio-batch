@@ -4,11 +4,11 @@ package biblio.book;
  * Created by heroinedor on 03/07/2017.
  */
 public class Book {
-    private int idBook;
+    private long idBook;
     private String title;
     private String content;
 
-    public int getIdBook() {
+    public long getIdBook() {
         return idBook;
     }
 
