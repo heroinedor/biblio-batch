@@ -16,7 +16,7 @@ public class SentenceProcessor implements ItemProcessor<Sentence, Sentence> {
     public void retrieveInterstepData(StepExecution stepExecution) {
         JobExecution jobExecution = stepExecution.getJobExecution();
         ExecutionContext jobContext = jobExecution.getExecutionContext();
-        Integer idBook = (Integer) jobContext.get("idBook");
+        Long idBook = (Long) jobContext.get("idBook");
         this.bookId = idBook;
     }
 
