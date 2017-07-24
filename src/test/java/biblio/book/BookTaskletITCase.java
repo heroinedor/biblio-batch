@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Created by edorso on 19/07/2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:context-test.xml"})
+@ContextConfiguration(locations = {"classpath:context-test.xml", "classpath:jobs/biblioBatchJob.xml"})
 public class BookTaskletITCase {
 
     @Autowired

@@ -17,7 +17,7 @@ import static org.springframework.batch.test.MetaDataInstanceFactory.createStepE
 /**
  * Created by heroinedor on 19/07/2017.
  */
-@ContextConfiguration(locations = {"classpath:context-test.xml"})
+@ContextConfiguration(locations = {"classpath:context-test.xml", "classpath:jobs/biblioBatchJob.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
         StepScopeTestExecutionListener.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,7 +39,7 @@ public class SentenceProcessorTest {
 
     public StepExecution getStepExecution() {
         StepExecution execution = createStepExecution();
-        execution.getJobExecution().getExecutionContext().putInt("idBook", idBook);
+        execution.getJobExecution().getExecutionContext().putLong("idBook", idBook);
         return execution;
     }
 
