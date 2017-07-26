@@ -10,9 +10,8 @@
         <tasklet ref="createBookTasklet" transaction-manager="transactionManager"/>
     </step>
 
-    <beans:bean id="createBookTasklet" class="biblio.book.BookTasklet">
-        <!-- TODO change the "resource" property to use value of jobParameters. Don't forget the bean scop -->
-        <beans:property name="resource" value="file:C:\temp\books\lorem-ipsum.txt"/>
+    <beans:bean id="createBookTasklet" class="biblio.book.BookTasklet" scope="step">
+        <beans:property name="resource" value="#{jobParameters['fileName']}"/>
         <beans:property name="bookDao" ref="bookDao"/>
     </beans:bean>
 </beans:beans>

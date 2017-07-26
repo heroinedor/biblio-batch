@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Created by heroinedor on 12/07/2017.
  */
@@ -23,10 +25,12 @@ public class BiblioBatchJobITCase {
 
     @Test
     public void testJob() throws Exception {
-        //TODO add 2 jobParameters to the jobLaunch method :
-        // -  key : "fileName", value "file:C:/temp/books/lorem-ipsum.txt" => to set the file to load in DB
-        // -  key : "random", value : a random number between 0 and 1000000 => a random parameter to let the job be restarted as much as wanted
-        JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+
+        JobParameters jobParameters =
+                new JobParametersBuilder().addString("fileName", "file:C:/temp/books/lorem-ipsum.txt")
+                        .addLong("random", ThreadLocalRandom.current().nextLong(1000000L)).toJobParameters();
+
+        JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
 
         Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
     }

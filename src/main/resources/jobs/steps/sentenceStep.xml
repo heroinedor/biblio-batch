@@ -13,9 +13,8 @@
     </step>
 
     <!-- itemReader -->
-    <beans:bean id="itemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-        <!-- TODO change the "resource" property to use value of jobParameters. Don't forget the bean scop -->
-        <beans:property name="resource" value="file:C:\temp\books\lorem-ipsum.txt"/>
+    <beans:bean id="itemReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+        <beans:property name="resource" value="#{jobParameters['fileName']}"/>
         <beans:property name="lineMapper">
             <beans:bean class="biblio.sentence.SentenceMapper"/>
         </beans:property>
