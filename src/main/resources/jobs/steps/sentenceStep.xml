@@ -14,6 +14,7 @@
 
     <!-- itemReader -->
     <beans:bean id="itemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+        <!-- TODO change the "resource" property to use value of jobParameters. Don't forget the bean scop -->
         <beans:property name="resource" value="file:C:\temp\books\lorem-ipsum.txt"/>
         <beans:property name="lineMapper">
             <beans:bean class="biblio.sentence.SentenceMapper"/>
@@ -24,7 +25,9 @@
     <beans:bean id="itemProcessor" class="biblio.sentence.SentenceProcessor" />
 
     <!-- itemWriter -->
-    <beans:bean id="mysqlItemWriter" class="biblio.sentence.SentenceWriter"/>
+    <beans:bean id="mysqlItemWriter" class="biblio.sentence.SentenceWriter">
+        <beans:property name="sentenceDao" ref="sentenceDao"/>
+    </beans:bean>
 </beans:beans>
 
 

@@ -11,6 +11,7 @@
     </step>
 
     <beans:bean id="createBookTasklet" class="biblio.book.BookTasklet">
+        <!-- TODO change the "resource" property to use value of jobParameters. Don't forget the bean scop -->
         <beans:property name="resource" value="file:C:\temp\books\lorem-ipsum.txt"/>
         <beans:property name="bookDao" ref="bookDao"/>
     </beans:bean>
