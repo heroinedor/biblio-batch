@@ -9,13 +9,13 @@ DROP SEQUENCE  WORD_SEQ ;
 CREATE TABLE BOOK (
   idbook NUMBER (11,0) NOT NULL,
   title VARCHAR2(200) NOT NULL,
-  content blob,
+  content clob,
   PRIMARY KEY (idbook)
 );
 
 CREATE TABLE SENTENCE (
   idsentence NUMBER (11,0) NOT NULL,
-  sentence VARCHAR2(500) DEFAULT NULL,
+  sentence clob,
   book_idbook NUMBER (11) NOT NULL,
   PRIMARY KEY (idsentence),
   FOREIGN KEY (book_idbook) REFERENCES BOOK (idbook) ENABLE

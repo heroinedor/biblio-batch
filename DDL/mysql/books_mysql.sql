@@ -8,13 +8,13 @@ DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book` (
   `idbook` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
-  `content` blob,
+  `content` LONGTEXT,
   PRIMARY KEY (`idbook`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='contient l''ensemble des livres';
 
 CREATE TABLE `sentence` (
   `idsentence` int(11) NOT NULL AUTO_INCREMENT,
-  `sentence` varchar(500) DEFAULT NULL,
+  `sentence` TEXT DEFAULT NULL,
   `book_idbook` int(11) NOT NULL,
   PRIMARY KEY (`idsentence`),
   KEY `fk_sentence_book_idx` (`book_idbook`),
