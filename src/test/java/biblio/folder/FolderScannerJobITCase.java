@@ -25,13 +25,13 @@ public class FolderScannerJobITCase {
 
     @Test
     public void testJob() throws Exception {
-        //TODO add an e2e test that uses jobLauncherFolder to launch the job with 2 jobParameters
-        // -  key : "input.folder.name", value "file:C:\\temp\\books" => to set the folder to scan
-        // -  key : "random", value : a random number between 0 and 1000000 => a random parameter to let the job be restarted as much as wanted
 
-        JobParameters jobParameters = null;
+        JobParameters jobParameters =
+                new JobParametersBuilder()
+                        .addString("input.folder.name", "file:C:\\temp\\books")
+                        .addLong("random", ThreadLocalRandom.current().nextLong(1000000L)).toJobParameters();
 
-        JobExecution jobExecution = jobLauncherFolder.launchJob();
+        JobExecution jobExecution = jobLauncherFolder.launchJob(jobParameters);
 
         Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
     }

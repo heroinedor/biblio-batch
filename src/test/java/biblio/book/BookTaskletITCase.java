@@ -26,7 +26,8 @@ public class BookTaskletITCase {
     @Test
     public void testBookTaskletTest() throws Exception {
         JobParameters jobParameters =
-                new JobParametersBuilder().addString("fileName", "file:C:/temp/books/lorem-ipsum.txt")
+                new JobParametersBuilder()
+                        .addString("fileName", "file:C:/temp/books/lorem-ipsum.txt")
                         .addLong("random", ThreadLocalRandom.current().nextLong(1000000L)).toJobParameters();
         JobExecution jobExecution = jobLauncherBiblio.launchStep("createBook", jobParameters);
         Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());

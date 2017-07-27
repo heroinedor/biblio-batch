@@ -33,7 +33,7 @@ public class ParseFolderTasklet implements Tasklet {
                 .getStepExecution()
                 .getExecutionContext()
 //                .put("file.list", files); files list case
-                .put("fileName", inputFileNameList[1]);
+                .put("fileName", inputFileNameList[0]);
 
         return RepeatStatus.FINISHED;
     }
