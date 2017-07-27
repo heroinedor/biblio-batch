@@ -17,18 +17,18 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by heroinedor on 19/07/2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:context-test.xml", "classpath:jobs/biblioBatchJob.xml"})
+@ContextConfiguration(locations = {"classpath:context-test.xml", "classpath:jobs/biblioBatchJob.xml", "classpath:jobs/folderScannerJob.xml"})
 public class BookTaskletITCase {
 
     @Autowired
-    private JobLauncherTestUtils jobLauncherTestUtils;
+    private JobLauncherTestUtils jobLauncherBiblio;
 
     @Test
     public void testBookTaskletTest() throws Exception {
         JobParameters jobParameters =
                 new JobParametersBuilder().addString("fileName", "file:C:/temp/books/lorem-ipsum.txt")
                         .addLong("random", ThreadLocalRandom.current().nextLong(1000000L)).toJobParameters();
-        JobExecution jobExecution = jobLauncherTestUtils.launchStep("createBook", jobParameters);
+        JobExecution jobExecution = jobLauncherBiblio.launchStep("createBook", jobParameters);
         Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
     }
 }

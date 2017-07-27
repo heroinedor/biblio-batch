@@ -22,8 +22,14 @@
         <property name="jobRepository" ref="jobRepository"/>
     </bean>
 
-    <bean id="jobLauncherTestUtils" class="org.springframework.batch.test.JobLauncherTestUtils" >
+    <bean id="jobLauncherBiblio" class="org.springframework.batch.test.JobLauncherTestUtils" >
         <property name="job" ref="biblioBatchJob"/>
+        <property name="jobRepository" ref="jobRepository"/>
+        <property name="jobLauncher" ref="jobLauncher"/>
+    </bean>
+
+    <bean id="jobLauncherFolder" class="org.springframework.batch.test.JobLauncherTestUtils" >
+        <property name="job" ref="folderScannerJob"/>
         <property name="jobRepository" ref="jobRepository"/>
         <property name="jobLauncher" ref="jobLauncher"/>
     </bean>

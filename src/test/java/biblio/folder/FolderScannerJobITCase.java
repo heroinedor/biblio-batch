@@ -1,4 +1,4 @@
-package biblio.book;
+package biblio.folder;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,20 +17,21 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by heroinedor on 12/07/2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:context-test.xml", "classpath:jobs/biblioBatchJob.xml", "classpath:jobs/folderScannerJob.xml"})
-public class BiblioBatchJobITCase {
+@ContextConfiguration(locations = {"classpath:context-test.xml", "classpath:jobs/folderScannerJob.xml"})
+public class FolderScannerJobITCase {
 
     @Autowired
-    private JobLauncherTestUtils jobLauncherBiblio;
+    private JobLauncherTestUtils jobLauncherFolder;
 
     @Test
     public void testJob() throws Exception {
+        //TODO add an e2e test that uses jobLauncherFolder to launch the job with 2 jobParameters
+        // -  key : "input.folder.name", value "file:C:\\temp\\books" => to set the folder to scan
+        // -  key : "random", value : a random number between 0 and 1000000 => a random parameter to let the job be restarted as much as wanted
 
-        JobParameters jobParameters =
-                new JobParametersBuilder().addString("fileName", "file:C:/temp/books/lorem-ipsum.txt")
-                        .addLong("random", ThreadLocalRandom.current().nextLong(1000000L)).toJobParameters();
+        JobParameters jobParameters = null;
 
-        JobExecution jobExecution = jobLauncherBiblio.launchJob(jobParameters);
+        JobExecution jobExecution = jobLauncherFolder.launchJob();
 
         Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
     }

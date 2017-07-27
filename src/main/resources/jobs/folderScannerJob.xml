@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/batch"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+    <beans:bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+
+    <!-- Job and steps import -->
+    <beans:import resource="steps/folderStep.xml"/>
+    <beans:import resource="biblioBatchJob.xml"/>
+
+    <!-- Job definition -->
+    <job id="folderScannerJob" job-repository="jobRepository">
+        <!-- TODO Add call to the jobParameterValidator -->
+        <step id="scanFolder" parent="folderStep" next="fileProcessStep">
+            <listeners>
+                <listener ref="folderPromotionListener"/>
+            </listeners>
+        </step>
+        <!-- TODO Add a JobStep called "fileProcessStep" that launches the biblioBatchJob with
+         - the "folderUnPromotionListener" to unpromote the "input.file.name" from jobExecutionContext to StepExecutionContext
+         - the job-parameters-extractor referencing the "jobParametersExtractor" bean
+         -->
+    </job>
+
+    <beans:bean id="paremetersValidator" class="biblio.folder.folderParameterValidator"/>
+
+    <beans:bean id="jobParametersExtractor"
+                class="org.springframework.batch.core.step.job.DefaultJobParametersExtractor">
+        <beans:property name="keys" value="input.file.name"/>
+    </beans:bean>
+
+    <beans:bean id="folderPromotionListener"
+                class="org.springframework.batch.core.listener.ExecutionContextPromotionListener">
+        <beans:property name="keys" value="input.file.name"/>
+    </beans:bean>
+
+    <beans:bean id="folderUnPromotionListener" class="biblio.folder.ExecutionContextUnPromotionListener"/>
+
+</beans:beans>

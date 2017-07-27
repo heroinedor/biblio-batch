@@ -17,7 +17,7 @@ import static org.springframework.batch.test.MetaDataInstanceFactory.createStepE
 /**
  * Created by heroinedor on 19/07/2017.
  */
-@ContextConfiguration(locations = {"classpath:context-test.xml", "classpath:jobs/biblioBatchJob.xml"})
+@ContextConfiguration(locations = {"classpath:context-test.xml", "classpath:jobs/biblioBatchJob.xml", "classpath:jobs/folderScannerJob.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SentenceProcessorTest {
 

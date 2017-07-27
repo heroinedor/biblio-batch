@@ -8,7 +8,7 @@
     <import resource="database.xml" />
     <!-- jobs -->
     <import resource="classpath:jobs/helloWorld.xml"/>
-    <import resource="classpath:jobs/biblioBatchJob.xml"/>
+    <import resource="classpath:jobs/folderScannerJob.xml"/>
 
     <!-- stored job-meta in database -->
     <bean id="jobRepository"
