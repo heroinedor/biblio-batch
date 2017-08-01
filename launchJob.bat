@@ -1,1 +1,1 @@
-java -cp "target/*" org.springframework.batch.core.launch.support.CommandLineJobRunner context.xml biblioBatchJob fileName="file:C:/temp/books/lorem-ipsum.txt"
+java -cp "target/*" org.springframework.batch.core.launch.support.CommandLineJobRunner context.xml folderScannerJob input.folder.name="file:C:/temp/books/lorem*.txt" random="2"

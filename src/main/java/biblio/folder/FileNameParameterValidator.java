@@ -19,7 +19,7 @@ public class FileNameParameterValidator implements JobParametersValidator, Resou
     private Resource[] resources;
 
     public void validate(JobParameters parameters) throws JobParametersInvalidException {
-        String fileNames = parameters.getString("fileName");
+        String fileNames = parameters.getString("input.folder.name");
 
         try {
             resources = ResourcePatternUtils.getResourcePatternResolver(resourceLoader).getResources(fileNames);
