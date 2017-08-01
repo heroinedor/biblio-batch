@@ -13,7 +13,7 @@
     <beans:import resource="steps/sentenceStep.xml"/>
 
     <job id="biblioBatchJob" job-repository="jobRepository">
-        <!-- TODO : add call to the FileNameParameterValidator -->
+        <validator ref="paremetersValidator"/>
         <step id="createBook" parent="bookStep" next="copyText">
             <listeners>
                 <listener ref="promotionListener"/>
@@ -25,4 +25,6 @@
     <beans:bean id="promotionListener" class="org.springframework.batch.core.listener.ExecutionContextPromotionListener">
         <beans:property name="keys" value="idBook"/>
     </beans:bean>
+
+    <beans:bean id="paremetersValidator" class="biblio.folder.FileNameParameterValidator"/>
 </beans:beans>
