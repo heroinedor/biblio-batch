@@ -12,7 +12,7 @@ import java.io.File;
 /**
  * Created by heroinedor on 05/07/2017.
  */
-public class parseFolderTasklet implements Tasklet {
+public class ParseFolderTasklet implements Tasklet {
 
     private Resource resource;
 
@@ -33,7 +33,7 @@ public class parseFolderTasklet implements Tasklet {
                 .getStepExecution()
                 .getExecutionContext()
 //                .put("file.list", files); files list case
-                .put("input.file.name", inputFileNameList[1]);
+                .put("fileName", inputFileNameList[1]);
 
         return RepeatStatus.FINISHED;
     }

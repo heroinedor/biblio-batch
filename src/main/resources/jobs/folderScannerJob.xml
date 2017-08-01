@@ -14,8 +14,8 @@
 
     <!-- Job definition -->
     <job id="folderScannerJob" job-repository="jobRepository">
-        <!-- TODO Add call to the jobParameterValidator -->
-        <step id="scanFolder" parent="folderStep" next="fileProcessStep">
+        <validator ref="paremetersValidator"/>
+        <step id="scanFolder" parent="folderStep">
             <listeners>
                 <listener ref="folderPromotionListener"/>
             </listeners>
@@ -26,16 +26,16 @@
          -->
     </job>
 
-    <beans:bean id="paremetersValidator" class="biblio.folder.folderParameterValidator"/>
+    <beans:bean id="paremetersValidator" class="biblio.folder.FileNameParameterValidator"/>
 
     <beans:bean id="jobParametersExtractor"
                 class="org.springframework.batch.core.step.job.DefaultJobParametersExtractor">
-        <beans:property name="keys" value="input.file.name"/>
+        <beans:property name="keys" value="fileName"/>
     </beans:bean>
 
     <beans:bean id="folderPromotionListener"
                 class="org.springframework.batch.core.listener.ExecutionContextPromotionListener">
-        <beans:property name="keys" value="input.file.name"/>
+        <beans:property name="keys" value="fileName"/>
     </beans:bean>
 
     <beans:bean id="folderUnPromotionListener" class="biblio.folder.ExecutionContextUnPromotionListener"/>

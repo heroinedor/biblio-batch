@@ -10,7 +10,7 @@
         <tasklet ref="parseFolderTasklet" transaction-manager="transactionManager"/>
     </step>
 
-    <beans:bean id="parseFolderTasklet" class="biblio.folder.parseFolderTasklet">
+    <beans:bean id="parseFolderTasklet" class="biblio.folder.ParseFolderTasklet">
         <!-- TODO add "resource" property to use value of jobParameters. Don't forget the bean scop -->
     </beans:bean>
 </beans:beans>
