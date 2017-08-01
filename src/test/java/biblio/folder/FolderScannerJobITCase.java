@@ -28,7 +28,7 @@ public class FolderScannerJobITCase {
 
         JobParameters jobParameters =
                 new JobParametersBuilder()
-                        .addString("input.folder.name", "file:C:\\temp\\books")
+                        .addString("input.folder.name", "file:C:/temp/books/lorem*.txt")
                         .addLong("random", ThreadLocalRandom.current().nextLong(1000000L)).toJobParameters();
 
         JobExecution jobExecution = jobLauncherFolder.launchJob(jobParameters);

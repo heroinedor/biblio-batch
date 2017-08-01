@@ -9,21 +9,16 @@
     <beans:bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
     <!-- Job and steps import -->
-    <beans:import resource="steps/folderStep.xml"/>
     <beans:import resource="biblioBatchJob.xml"/>
 
     <!-- Job definition -->
     <job id="folderScannerJob" job-repository="jobRepository">
         <validator ref="paremetersValidator"/>
-        <step id="scanFolder" parent="folderStep">
-            <listeners>
-                <listener ref="folderPromotionListener"/>
-            </listeners>
-        </step>
-        <!-- TODO Add a JobStep called "fileProcessStep" that launches the biblioBatchJob with
-         - the "folderUnPromotionListener" to unpromote the "input.file.name" from jobExecutionContext to StepExecutionContext
-         - the job-parameters-extractor referencing the "jobParametersExtractor" bean
-         -->
+        <!-- TODO Add a step called "fileProcess" made of a partition which:
+            - calls the step called "fileProcessStep"
+            - has a partitioner linked to the "partitioner" bean
+            - has a partition handler with a grid-size of 5 and with a task-executor linked to the "taskExecutor" bean
+        -->
     </job>
 
     <beans:bean id="paremetersValidator" class="biblio.folder.FileNameParameterValidator"/>
@@ -33,11 +28,18 @@
         <beans:property name="keys" value="fileName"/>
     </beans:bean>
 
-    <beans:bean id="folderPromotionListener"
-                class="org.springframework.batch.core.listener.ExecutionContextPromotionListener">
-        <beans:property name="keys" value="fileName"/>
+    <step id="fileProcessStep">
+        <!-- TODO Add a JobStep called "fileProcessStep" that launches the biblioBatchJob with
+         the job-parameters-extractor referencing the "jobParametersExtractor" bean
+        -->
+    </step>
+
+    <beans:bean id="partitioner">
+        <!-- TODO link this bean to the "org.springframework.batch.core.partition.support.MultiResourcePartitioner" class
+            with a property "resources" linked to the 'input.folder.name' jobParameter
+        -->
     </beans:bean>
 
-    <beans:bean id="folderUnPromotionListener" class="biblio.folder.ExecutionContextUnPromotionListener"/>
+    <beans:bean id="taskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor"/>
 
 </beans:beans>
