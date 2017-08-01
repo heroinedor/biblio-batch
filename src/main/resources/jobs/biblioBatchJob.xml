@@ -13,6 +13,7 @@
     <beans:import resource="steps/sentenceStep.xml"/>
 
     <job id="biblioBatchJob" job-repository="jobRepository">
+        <!-- TODO : add call to the FileNameParameterValidator -->
         <step id="createBook" parent="bookStep" next="copyText">
             <listeners>
                 <listener ref="promotionListener"/>
